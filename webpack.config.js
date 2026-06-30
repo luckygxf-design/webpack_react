@@ -52,9 +52,9 @@ module.exports = {
       filename: 'index.html'
     }),
     new webpack.DefinePlugin({
-      'process.env.REACT_APP_USER_API_URL': JSON.stringify(process.env.REACT_APP_USER_API_URL || 'http://localhost:3001/api'),
-      'process.env.REACT_APP_PRODUCT_API_URL': JSON.stringify(process.env.REACT_APP_PRODUCT_API_URL || 'http://localhost:3001/api'),
-      'process.env.REACT_APP_ORDER_API_URL': JSON.stringify(process.env.REACT_APP_ORDER_API_URL || 'http://localhost:3001/api'),
+      'process.env.REACT_APP_USER_API_URL': JSON.stringify(process.env.REACT_APP_USER_API_URL || 'http://localhost:4000/api'),
+      'process.env.REACT_APP_PRODUCT_API_URL': JSON.stringify(process.env.REACT_APP_PRODUCT_API_URL || 'http://localhost:4000/api'),
+      'process.env.REACT_APP_ORDER_API_URL': JSON.stringify(process.env.REACT_APP_ORDER_API_URL || 'http://localhost:4000/api'),
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
     })
   ],
@@ -66,6 +66,14 @@ module.exports = {
     },
     port: 4000,
     hot: true,
-    open: true
+    open: true,
+    proxy: {
+      '/api': { // ① 匹配规则：当请求路径以 '/api' 开头
+        target: 'http://localhost:3001', // ② 代理目标：你的后端服务器地址
+        changeOrigin: true, // ③ 重要：修改请求头中的 host，建议设为 true
+        // pathRewrite: { '^/api': '' }, // ④ 路径重写：移除 '/api' 前缀
+        secure: false, // 如果 target 是 https 且证书是自签名，可能需要设为 false
+      },
+    }
   }
 };

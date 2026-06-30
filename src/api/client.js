@@ -2,9 +2,9 @@
 import axios from 'axios';
 
 // 1. 定义 API 地址（带默认值）
-const USER_API_URL = process.env.REACT_APP_USER_API_URL || 'http://localhost:3001/api';
-const PRODUCT_API_URL = process.env.REACT_APP_PRODUCT_API_URL || 'http://localhost:3001/api';
-const ORDER_API_URL = process.env.REACT_APP_ORDER_API_URL || 'http://localhost:3001/api';
+const USER_API_URL = process.env.REACT_APP_USER_API_URL || 'http://localhost:4000/api';
+const PRODUCT_API_URL = process.env.REACT_APP_PRODUCT_API_URL || 'http://localhost:4000/api';
+const ORDER_API_URL = process.env.REACT_APP_ORDER_API_URL || 'http://localhost:4000/api';
 
 // 2. 创建 axios 实例
 export const userApi = axios.create({
